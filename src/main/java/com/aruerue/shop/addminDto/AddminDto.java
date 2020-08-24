@@ -1,4 +1,4 @@
-package com.aruerue.shop.dto.addminDto;
+package com.aruerue.shop.addminDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

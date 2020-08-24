@@ -5,42 +5,94 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 </head>
 <body>
 	<h1>관리자 페이지입니다.</h1>
 	<form>
-		title: <input type="text" id="title" name="title" /><br /> 
+		title: <input type="text" id="title" name="title" /><br />
 		thumb :<input type="text" id="thumb" name="thumb" /><br />
 		price :<input type="text" id="price" name="price" /><br />
 		 disc : <input type="text" id="disc" name="disc" /><br />
-		sale에 올린다<input type="radio" id="radioSale" name="radioSale" value=true checked>
-		sale에 안올린다<input type="radio" id="radioSale" name="radioSale" value=false checked>
-		<br /> discounted가격 : <input type="text" id=discounted name=discounted/><br />
+		sale에 올린다<input type="radio" id="radioSale" name="radioSale" value="true" checked>
+		sale에 안올린다<input type="radio" id="radioSale" name="radioSale" value="false" >
+		<br /> discounted가격 : <input type="text" id=discounted name=discounted class ="radioSale"/><br />
 		광고에 올린다 :<input type="radio" id="radioAd"
 			name="radioAd" value=true checked>
 			 광고에 안올린다 :<input type="radio"
 			id="radioAd" name="radioAd" value=false checked><br />
-			
+
 		content: <input type="text" id="content" name="content" /><br />
 			세트상품이다 :<input type="radio" id="radioParentTypeId"
 			name="radioParentTypeId" value="2" checked>
 			 개별상품이다 : <input type="radio"
 			id="radioParentTypeId" name="radioParentTypeId" value="1" checked><br />
-			
-		bgImg<input type="text" id="bgImg" name="bgImg" /><br />
-		
+
+
+
 		best로 올린다 :<input type="radio" id="radioBest"
-			name="radioBest" value=true checked> 
+			name="radioBest" value=true checked>
 			best로 안올린다 : <input type="radio"
 			id="radioBest" name="radioBest" value=false checked><br />
-			
+
 			New로 올린다 :<input type="radio" id="radioNew"
 			name="radioNew" value=true checked>
 			 New로 안올린다 : <input type="radio"
 			id="radioNew" name="radioNew" value=false checked><br />
 
+			bgImg : <input type="file" id="input_img" name="img"><br />
+		<div class="img_wrap">
+						<img id="img"  width="300" height="200"/>
+					</div> <br />
+
 	</form>
 <button id="btn-save">올립니다</button>
-<script src="/js/addmin.js"></script>
+<script src="/js/addmin.js"/>
+<script>
+$(document).ready(function(){
+	console.log('시작 = ',$('input:radio[name="radioSale"]:checked').val());
+    // 라디오버튼 클릭시 이벤트 발생
+    $("input:radio[name=radioSale]").click(function(){
+        if($("input:radio[name=radioSale]:checked").val() == 'true'){
+            $(".radioSale").attr("disabled",false);
+            // radio 버튼의 value 값이 1이라면 활성화
+        	console.log($('input:radio[name="radioSale"]:checked').val());
+        }else if($("input:radio[name=radioSale]:checked").val() == 'false'){
+              $(".radioSale").attr("disabled",true);
+          	console.log($('input:radio[name="radioSale"]:checked').val());
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+    });
+});
+
+
+
+	var sel_file;
+
+	$(document).ready(function() {
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+
+	function handleImgFileSelect(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+
+			sel_file = f;
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+	</script>
 </body>
+
 </html>

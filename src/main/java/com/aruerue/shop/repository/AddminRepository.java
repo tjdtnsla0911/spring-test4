@@ -2,7 +2,7 @@ package com.aruerue.shop.repository;
 
 import java.util.List;
 
-import com.aruerue.shop.dto.addminDto.AddminDto;
+import com.aruerue.shop.addminDto.AddminDto;
 import com.aruerue.shop.model.product.Category;
 import com.aruerue.shop.model.product.Product;
 import com.aruerue.shop.model.product.Product_status;
@@ -15,6 +15,6 @@ public interface AddminRepository {
 	public void saveRelated_product(AddminDto addminDto);
 	public void saveProduct_status(AddminDto addminDto);
 	///////////////////////////////////////////////////////////////
-	
-	List<AddminDto> productList();
+
+	List<Product> productList();
 }
