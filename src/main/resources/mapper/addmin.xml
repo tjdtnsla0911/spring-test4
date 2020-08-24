@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aruerue.shop.repository">
+
+<insert id="saveProduct">
+INSERT INTO product(title,thumb,price,disc,ad,discounted,content,categoryId,bgImg)
+values(#{title},#{thumb},#{price},#{disc},#{radioAd2},#{discounted},#{content},#{radioParentTypeId},#{bgImg})
+	</insert>
+<insert id="saveProduct_status">
+INSERT INTO product_status (sale,newly,best)
+values(#{radioSale2},#{radioNew2},#{radioBest2})
+</insert>
+
+</mapper>
