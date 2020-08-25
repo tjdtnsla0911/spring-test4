@@ -12,3 +12,11 @@ spring:
     url: jdbc:mysql://localhost:3306/areuareu?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+  
+  
+file:
+  path: C:/src/instagram/src/main/resources/upload/

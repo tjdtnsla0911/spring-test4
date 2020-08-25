@@ -2,57 +2,131 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
-<h1>관리자페이지입니다.</h1>
+	<h1>관리자페이지입니다.</h1>
+	<div class="container">
+		<h2>관리자 테이블</h2>
+		<p>C R U D</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>title</th>
+					<th>thumb</th>
+					<th>price</th>
+					<th>disc</th>
+					<th>ad</th>
+					<th>discounted</th>
+					<th>content</th>
+					<th>categoryId</th>
+					<th>bgImg</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#productList}}
+				<tr>
+					<td>{{id}}
+					<input type="text" id="userid_{{id}}"
+						class="userid" name="userid" value="{{id}}" />
+
+					</td>
+					<td>{{title}}</td>
+					<td>{{thumb}}</td>
+					<td>{{price}}</td>
+					<td>{{disc}}</td>
+
+					<td>{{ad}}</td>
+					<td>{{discounted}}</td>
+					<td>{{content}}</td>
+					<td>{{categoryId}}</td>
+					<td><img src="{{bgImg}}" alt="없다"></td>
+					<td>
+						<button class="btn-delete" id="bt-delete-{{id}}"
+							style="WIDTH: 60pt; HEIGHT: 20pt">삭제하기</button>
+
+						<br /><br />
+						<button type="button" data-toggle="modal" data-target="#myModal{{id}}"
+							style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>
+
+						<div class="modal fade" id="myModal{{id}}" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">회원 정보 수정을 합시다~</h4>
+									</div>
+									<div class="modal-body">
+										<input type="text" id="modalid" class="userid" name="userid"
+											value="{{id}}" />
+											<br/><br/>
+												<input type="text" id="modaltitle{{id}}" class="modaltitle" name="userid"
+											value="{{title}}" />	<br/><br/>
+
+												<input type="text" id="modalthumb{{id}}" class="modalthumb" name="userid"
+											value="{{thumb}}" />	<br/><br/>
+
+												<input type="text" id="modalprice{{id}}" class="modalprice" name="userid"
+											value="{{price}}" />	<br/><br/>
+
+												<input type="text" id="modaldisc{{id}}" class="modaldisc" name="userid"
+											value="{{disc}}" />	<br/><br/>
+
+												<input type="text" id="modalad{{id}}" class="userid" name="userid"
+											value="{{ad}}" />	<br/><br/>
+
+												<input type="text" id="modaldiscounted{{id}}" class="userid" name="userid"
+											value="{{discounted}}" />	<br/><br/>
+												<input type="text" id="modalcontent{{id}}" class="userid" name="userid"
+											value="{{content}}" />	<br/><br/>
+												<input type="text" id="modalcategoryId{{id}}" class="userid" name="userid"
+											value="{{categoryId}}" />	<br/><br/>
+												<input type="text" id="modalbgImg{{id}}" class="userid" name="userid"
+											value="{{bgImg}}" />	<br/><br/>
+
+									</div>
+									<div class="modal-footer">
+									<button class="btn-update" id="btn-update-{{id}}"
+							style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</div>
+						</div> <!--  <button class="btn-update" id="bt-update-{{id}}"  style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>-->
+
+					</td>
+				</tr>
+				{{/productList}}
+			</tbody>
+		</table>
+	</div>
+
+	<!-- ----------------모달 -------------------- -->
 
 
-<div class="container">
-  <h2>관리자 테이블</h2>
-  <p>C R U D</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>id</th>
-        <th>title</th>
-        <th>thumb</th>
-           <th>price</th>
-        <th>disc</th>
-        <th>ad</th>
-           <th>discounted</th>
-        <th>content</th>
-        <th>categoryId</th>
-        <th>bgImg</th>
-      </tr>
-    </thead>
-    <tbody>
+	<script>
+
+	</script>
 
 
-      {{#productList}}
-<tr>
-        <td>{{id}}</td>
-        <td>{{title}}</td>
-        <td>{{thumb}}</td>
-        <td>{{price}}</td>
-        <td>{{disc}}</td>
-        <td>{{ad}}</td>
-        <td>{{discounted}}</td>
-        <td>{{content}}</td>
-        <td>{{categoryId}}</td>
-        <td><img src={{bgImg}} art="이미지없음"></td>
-</tr>
-{{/productList}}
 
 
-    </tbody>
-  </table>
-</div>
 </body>
+<script src="/js/addmin.js"></script>
 </html>
