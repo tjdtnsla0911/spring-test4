@@ -9,9 +9,19 @@ INSERT INTO product(title,thumb,price,disc,ad,discounted,content,categoryId,bgIm
 values(#{title},#{thumb},#{price},#{disc},#{radioAd2},#{discounted},#{content},#{radioParentTypeId},#{bgImg})
 	</insert>
 <insert id="saveProduct_status">
-INSERT INTO product_status (sale,newly,best)
-values(#{radioSale2},#{radioNew2},#{radioBest2})
+INSERT INTO product_status (sale,newly,best,productId)
+values(#{radioSale2},#{radioNew2},#{radioBest2},#{productid})
 </insert>
+
+<insert id="saveRelated_product">
+INSERT INTO related_product (parentProductId,relatedproductId)
+values(#{parentProductId},#{relateProductId})
+</insert>
+
+<select id="selectProduct" resultType="com.aruerue.shop.addminDto.AddminDto">
+select * from product where title=#{title} and content=#{content}
+
+</select>
 <!--
 <select id="productList" resultType="com.aruerue.shop.addminDto">
 select pro.title,pro.thumb,pro.price,pro.disc,pro.ad,pro.discounted,pro.content,pro.categoryId,pro.bgImg,pst.sale,pst.newly,pst.best,rel.parentProductId,rel.relatedProductId,ca.parentTypeId
@@ -20,9 +30,9 @@ on pro.id= rel.parentProductId and pro.id = pst.productId and ca.parentTypeId = 
 </select>
 -->
 <select id="productList" resultType="com.aruerue.shop.model.product.Product">
-select pro.id,pst.productId,pro.title,pro.thumb,pro.price,pro.disc,pro.ad,pro.discounted,pro.content,pro.categoryId,pro.bgImg,pst.sale,pst.newly,pst.best,rel.parentProductId,rel.relatedProductId,ca.parentTypeId
-from product pro inner join related_product rel inner join product_status pst inner join category ca
-on pro.id= rel.parentProductId and pro.id = pst.productId and ca.parentTypeId = pro.categoryId
+select pro.id,pst.productId,pro.title,pro.thumb,pro.price,pro.disc,pro.ad,pro.discounted,pro.content,pro.categoryId,pro.bgImg,pst.sale,pst.newly,pst.best,ca.parentTypeId
+from product pro inner join product_status pst inner join category ca
+on  pro.id = pst.productId and ca.parentTypeId = pro.categoryId
 </select>
 
 	<delete id="listdelete">
@@ -36,4 +46,11 @@ on pro.id= rel.parentProductId and pro.id = pst.productId and ca.parentTypeId = 
 	discounted = #{discounted} , bgImg =#{bgImg}
 	where id= #{id}
 	</update>
+
+
+	<select id="addminDtoList" resultType="com.aruerue.shop.addminDto.AddminDto">
+select pro.id,pst.productId,pro.title,pro.thumb,pro.price,pro.disc,pro.ad,pro.discounted,pro.content,pro.categoryId,pro.bgImg,pst.sale,pst.newly,pst.best,ca.parentTypeId
+from product pro inner join product_status pst inner join category ca
+on  pro.id = pst.productId and ca.parentTypeId = pro.categoryId
+</select>
 </mapper>

@@ -15,8 +15,10 @@
 <body>
 	<center>
 		<h1>관리자 페이지입니다.</h1>
+
 	</center>
 	<form>
+
 		title: <input type="text" id="title" name="title" /><br /> thumb :<input
 			type="text" id="thumb" name="thumb" /><br /> price :<input
 			type="text" id="price" name="price" /><br /> disc : <input
@@ -37,20 +39,32 @@
 			name="radioBest" value=false checked><br /> New로 올린다 :<input
 			type="radio" id="radioNew" name="radioNew" value=true checked>
 		New로 안올린다 : <input type="radio" id="radioNew" name="radioNew"
-			value=false checked><br />
-
-			bgImg : <input type="file"
+			value=false checked><br /> bgImg : <input type="file"
 			id="input_img2" name="img" /><br />
 		<div class="img_wrap">
-			<img id="test" src="" style="height: 200px" width="200px" />
+
+			 <img id="test" src="" style="height: 200px" width="200px" />
 		</div>
 		<br /> <input type="hidden" id="fuck" value="null" />
 
 	</form>
 
 	<button onclick="javascript:encodeImageFileAsURLs()">사진미리보기(반드시클릭하셔야함)</button>
-<br/><br/>
+	<br />
+	관련상품(부모): <select id="parentProductId" name="parentProductId"> {{#list}}
+				<option value="{{id}}">{{title}}</option> {{/list}}
+
+			</select>
+			관련상품(자식) : <select id="relateProductId" name="relateProductId"> {{#list}}
+				<option value="{{id}}">{{title}}</option> {{/list}}
+
+			</select>
+	<br />
+	<br />
+	<br />
+	<br />
 	<button id="btn-save">전송합니다</button>
+
 
 
 
@@ -70,6 +84,7 @@
 	</script>
 
 	<script src="/js/addmin.js"></script>
+
 
 </body>
 

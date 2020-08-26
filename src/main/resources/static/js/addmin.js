@@ -63,6 +63,8 @@ let index = {
 
 			//alert('user의 save함수 호출됨');
 			let data = {
+					parentProductId:$("#parentProductId").val(),
+					relateProductId:$("#relateProductId").val(),
 					title: $("#title").val(),
 					thumb: $("#thumb").val(),
 					price: $("#price").val(),
@@ -75,7 +77,9 @@ let index = {
 					radioParentTypeId : $('input:radio[name="radioParentTypeId"]:checked').val(),
 					radioBest : $('input:radio[name="radioBest"]:checked').val(),
 					radioNew : $('input:radio[name="radioNew"]:checked').val(),
+
 			};
+			console.log('data = ',data);
 			if(data.bgImg.length < 444){
 				alert('사진미리보기를 누르지 않으셨습니다.');
 
@@ -107,12 +111,9 @@ let index = {
 			}).done(function(resp){
 				console.log(resp);
 				alert('성공');
-//				if(resp.status === 500){
-//					alert("회원가입에 실패하였습니다.");
-//				}else{
-//					alert("회원가입이 완료되었습니다.");
-					location.href = "/list";
-//				}
+//
+					//location.href = "/list";
+
 
 			}).fail(function(error){
 				alert(JSON.stringify(error));

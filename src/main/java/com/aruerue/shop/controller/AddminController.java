@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ import com.aruerue.shop.addminDto.AddminDto;
 import com.aruerue.shop.controller.dto.ProductDto;
 import com.aruerue.shop.controller.dto.ResponseDto;
 import com.aruerue.shop.model.product.Product;
+import com.aruerue.shop.model.product.Related_product;
 import com.aruerue.shop.model.user.User;
 import com.aruerue.shop.repository.AddminRepository;
 
@@ -76,7 +78,9 @@ public class AddminController{
 	}
 
 	@GetMapping("/axios")
-	public String index() {
+	public String index(Model model) {
+		List<AddminDto>pro= addminRepository.addminDtoList();
+		model.addAttribute("list",pro);
 		System.out.println("axios 탓다");
 		return "index";
 	}
@@ -124,8 +128,18 @@ public class AddminController{
 		System.out.println("다하고 나서 radioParentTypeId = "+addminDto.getRadioParentTypeId());
 		System.out.println("다하고 나서 bgImg = "+addminDto.getBgImg());
 
-		System.out.println(addminDto.getBgImg().length());
+		System.out.println(addminDto.getBgImg().length()); //여기서 productId받고
+
+
+		addminRepository.saveRelated_product(addminDto);
 		addminRepository.saveProduct(addminDto);
+		System.out.println("여기까오면 save는된거임");
+		AddminDto addminDto2= addminRepository.selectProduct(addminDto);
+		System.out.println("여기까지오면 select는한거임 결과 = "+addminDto2);
+		System.out.println("productId에 넣을꺼 = "+addminDto2.getId());
+		addminDto.setProductid(addminDto2.getId());
+
+
 		addminRepository.saveProduct_status(addminDto);
 
 		System.out.println("무사히 넣은듯?");

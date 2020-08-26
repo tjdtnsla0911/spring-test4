@@ -11,12 +11,16 @@ import com.aruerue.shop.model.user.User;
 
 public interface AddminRepository {
 	///////////등록할떄 이거 3개가 동시에 Insert되게함.////////////////////////
+	List<AddminDto> addminDtoList();
 	public void saveProduct(AddminDto addminDto);
 	public void saveRelated_product(AddminDto addminDto);
 	public void saveProduct_status(AddminDto addminDto);
+
+	public AddminDto selectProduct(AddminDto addminDto);
 	///////////////////////////////////////////////////////////////
 
 	List<Product> productList();
+
 
 	//////////////////////////////////////////////////
 	public int listdelete(int id);
