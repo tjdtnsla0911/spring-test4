@@ -51,11 +51,15 @@
 
 	<button onclick="javascript:encodeImageFileAsURLs()">사진미리보기(반드시클릭하셔야함)</button>
 	<br />
-	관련상품(부모): <select id="parentProductId" name="parentProductId"> {{#list}}
+	관련상품(부모): <select id="parentProductId" name="parentProductId">
+	           <option value="0">관련상품없음</option>
+	            {{#list}}
 				<option value="{{id}}">{{title}}</option> {{/list}}
 
 			</select>
-			관련상품(자식) : <select id="relateProductId" name="relateProductId"> {{#list}}
+			관련상품(자식) : <select id="relateProductId" name="relateProductId"> 
+			 <option value="0">관련상품없음</option>
+			 {{#list}}
 				<option value="{{id}}">{{title}}</option> {{/list}}
 
 			</select>

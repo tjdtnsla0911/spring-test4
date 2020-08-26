@@ -55,6 +55,7 @@ public class AddminController{
 //	@Value("${file.path}")
 //	private String fileRealPath;
 
+	//여긴현재안씀
 	private AddminDto addminDto;
 	@GetMapping("/list2")
 	public @ResponseBody List<Product> list2(Model model) {
@@ -68,11 +69,13 @@ public class AddminController{
 
 
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Model model, Model model2) {
 
 	addminRepository.productList();
+	List<AddminDto> add = addminRepository.relatedProduct();
 		System.out.println("결과 = "+addminRepository.productList());
 		model.addAttribute("productList",addminRepository.productList());
+		model2.addAttribute("relatedProduct",add);
 		System.out.println("왓니");
 		return "addList";
 	}
@@ -80,6 +83,7 @@ public class AddminController{
 	@GetMapping("/axios")
 	public String index(Model model) {
 		List<AddminDto>pro= addminRepository.addminDtoList();
+		
 		model.addAttribute("list",pro);
 		System.out.println("axios 탓다");
 		return "index";

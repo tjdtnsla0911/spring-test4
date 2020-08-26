@@ -35,6 +35,13 @@ from product pro inner join product_status pst inner join category ca
 on  pro.id = pst.productId and ca.parentTypeId = pro.categoryId
 </select>
 
+
+<select id="relatedProduct" resultType="com.aruerue.shop.addminDto.AddminDto">
+select pro.title,pro.thumb,pro.price,pro.disc,pro.ad,pro.discounted,pro.content,pro.categoryId,pro.bgImg,pst.sale,pst.newly,pst.best,rel.parentProductId,rel.relatedProductId,ca.parentTypeId
+from product pro inner join related_product rel inner join product_status pst inner join category ca
+on pro.id= rel.parentProductId and pro.id = pst.productId and ca.parentTypeId = pro.categoryId;
+</select>
+
 	<delete id="listdelete">
 		DELETE FROM product
 		WHERE id=#{id}
