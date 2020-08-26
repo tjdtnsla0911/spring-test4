@@ -20,4 +20,7 @@ public interface AddminRepository {
 
 	//////////////////////////////////////////////////
 	public int listdelete(int id);
+
+	///////////////////////////////////////////
+	public void updata(Product product);
 }

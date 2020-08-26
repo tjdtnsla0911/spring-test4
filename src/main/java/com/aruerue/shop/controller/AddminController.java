@@ -134,7 +134,7 @@ public class AddminController{
 		return "Ok";
 	}
 
-
+	//등록물품 삭제하는곳
 	@DeleteMapping("/listDelete/{id}")
 	public @ResponseBody String listDelete(@PathVariable int id) {
 		System.out.println("listDelete에 왔쪄용!!");
@@ -143,11 +143,17 @@ public class AddminController{
 		System.out.println("성공한거같은데 ㅅㅂ ");
 		return "Ok";
 	}
+	//등록물품
 	@PutMapping("/change/{id}")
-	public @ResponseBody String updata(@PathVariable int id , @RequestBody ProductDto productDto) {
+	public @ResponseBody String updata(@PathVariable int id , @RequestBody Product product) {
 		System.out.println("체인지에왔음");
-		System.out.println("가져온값 = "+productDto);
-		return "null";
+
+		System.out.println("product = "+product);
+		addminRepository.updata(product);
+
+
+
+		return "OK";
 
 	}
 

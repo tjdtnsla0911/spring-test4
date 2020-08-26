@@ -29,4 +29,11 @@ on pro.id= rel.parentProductId and pro.id = pst.productId and ca.parentTypeId = 
 		DELETE FROM product
 		WHERE id=#{id}
 	</delete>
+
+	<update id="updata">
+	UPDATE product set title =#{title} , thumb = #{thumb} ,
+	price = #{price} , disc = #{disc},
+	discounted = #{discounted}
+	where id= #{id}
+	</update>
 </mapper>
