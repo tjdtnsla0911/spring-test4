@@ -112,7 +112,7 @@ let index = {
 				console.log(resp);
 				alert('성공');
 //
-					//location.href = "/list";
+					location.href = "/list";
 
 
 			}).fail(function(error){
@@ -212,5 +212,9 @@ console.log('e = ',e)
 
 	reader.readAsDataURL(file);
 }
+
+
+
+
 
 index.init();

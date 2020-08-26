@@ -41,6 +41,7 @@ body {
 					<th>content</th>
 					<th>categoryId</th>
 					<th>bgImg</th>
+					<th>기능</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,10 +64,11 @@ body {
 						width="100px"></td>
 					<td>
 						<button class="btn-delete" id="bt-delete-{{id}}"
-							style="WIDTH: 60pt; HEIGHT: 20pt">삭제하기</button> <br /> <br />
+							style="WIDTH: 60pt; HEIGHT: 20pt">삭제하기</button> <br />
 						<button type="button" data-toggle="modal"
 							data-target="#myModal{{id}}" style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>
-
+<br/>
+						<button>관련상품</button>
 						<div class="modal fade" id="myModal{{id}}" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
@@ -122,6 +124,8 @@ body {
 							</div>
 						</div> <!--  <button class="btn-update" id="bt-update-{{id}}"  style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>-->
 
+<!-- ------------------------------------------------- -->
+
 
 
 
@@ -134,11 +138,6 @@ body {
 	</div>
 
 	<!-- ----------------모달 -------------------- -->
-
-
-	<script>
-
-	</script>
 
 
 
