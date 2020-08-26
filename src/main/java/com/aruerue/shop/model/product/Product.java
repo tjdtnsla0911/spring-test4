@@ -20,5 +20,6 @@ private int discounted;
 private String content;
 private int categoryId;
 private String bgImg;
+private String changebgImg;
 
 }

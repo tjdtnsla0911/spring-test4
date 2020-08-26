@@ -146,6 +146,13 @@ public class AddminController{
 	//등록물품
 	@PutMapping("/change/{id}")
 	public @ResponseBody String updata(@PathVariable int id , @RequestBody Product product) {
+		System.out.println("가져온 체인지값 = "+product);
+		System.out.println("sdfsdf = "+product.getChangebgImg());
+		if(!product.getChangebgImg().equals("null")) {
+			System.out.println("if문에 왔어요");
+			System.out.println("if문 ㅅㅂ = "+product.getChangebgImg());
+			product.setBgImg(product.getChangebgImg());
+		}
 		System.out.println("체인지에왔음");
 
 		System.out.println("product = "+product);

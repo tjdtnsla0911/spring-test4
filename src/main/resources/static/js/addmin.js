@@ -75,12 +75,18 @@ let index = {
 					radioParentTypeId : $('input:radio[name="radioParentTypeId"]:checked').val(),
 					radioBest : $('input:radio[name="radioBest"]:checked').val(),
 					radioNew : $('input:radio[name="radioNew"]:checked').val(),
-
-
 			};
 			if(data.bgImg.length < 444){
 				alert('사진미리보기를 누르지 않으셨습니다.');
 
+					return;
+
+			}
+
+			if(fuck=="null"){
+				alert('사진을 등록하시지않으셨습니다.');
+
+					return;
 			}
 
 			console.log(data);
@@ -125,6 +131,7 @@ let index = {
 			console.log('data2 = ',data2);
 			//bt-update-{{id}}
 			let data = {
+					changebgImg : $("#fuck"+data2.id).val(),
 				    id : $("#id"+data2.id).val(),
 					title: $("#modaltitle"+data2.id).val(),
 					thumb: $("#modalthumb"+data2.id).val(),
@@ -158,7 +165,7 @@ let index = {
 			}).done(function(resp){
 				alert("물품변경이 완료되었습니다.");
 				//console.log(resp);
-				location.href = "/list";
+				//location.href = "/list";
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			});
@@ -187,6 +194,22 @@ let index = {
 			});
 
 		},
+}
+
+function encodeImageFileAsURL(e) {
+	var file = $('#input_img2'+e).prop('files')[0];
+	console.log('file = ',file);
+
+console.log('e = ',e)
+
+	var reader = new FileReader();
+	reader.onloadend = function() {
+		console.log('RESULT', reader.result);
+		$('#fuck'+e).attr('value', reader.result);
+		$('#test'+e).attr('src', reader.result);
+	};
+
+	reader.readAsDataURL(file);
 }
 
 index.init();
