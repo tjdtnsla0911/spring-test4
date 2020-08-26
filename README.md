@@ -1,63 +1,26 @@
-# Spring Boot 의존성
+#product table의 thumb과 bgImg가 longtext로 바꼇습니다 (이유 - base64형식으로 사진받으니 length가 96000임 ㅈㅈ)
+#쿼리문 다시 손좀볼께요
 
-- mybatis
-- jwt
-- security
-- web
-- mysql
-- devtools
-- lombok
 
-# 참고 사이트
-
-Link: [구글로그인]][https://console.developers.google.com/]
-Link: [구글로그인]][https://developers.google.com/identity/sign-in/web/reference/]
-
-Link: [아임포트시작하기]][https://www.iamport.kr/getstarted]
-Link: [아임포트결제하기]][https://admin.iamport.kr/payments]
-Link: [아임포트결제하기2]][https://docs.iamport.kr/implementation/payment#mobile-web?lang=ko]
-
-# DB
-
-```sql
-create user 'areuareu'@'%' identified by 'bitc5600';
-GRANT ALL PRIVILEGES ON *.* TO 'areuareu'@'%';
-create database areuareu;
-use areuareu;
 ```
 
-# DB 테이블 생성
 
-```sql
-DROP TABLE product;
-DROP TABLE product_status;
-DROP TABLE review;
-DROP TABLE user;
-DROP TABLE recomment;
-DROP TABLE notice;
-DROP TABLE qna;
-DROP TABLE orders;
-DROP TABLE orders_detail;
-DROP TABLE wishlist;
-DROP TABLE coupon;
-DROP TABLE point;
-DROP TABLE related_product;
-DROP TABLE category;
-DROP TABLE cart;
+use areuareu;
 
 CREATE TABLE product (
 	id int auto_increment primary key,
     title varchar(100) not null, #제목
-    thumb varchar(1500) not null, #썸네일
+    thumb longtext not null, #썸네일
     price int, #원가
     disc varchar(100), #설명
     ad boolean not null, #광고 #메인에 걸꺼냐 안걸꺼냐
     discounted  int, #할인
     content longtext, #내용
     categoryId int, #1이면 개별상품 2면 세트상품
-    bgImg varchar(1500) not null #메인 큰 사진 경로
+    bgImg longtext not null #메인 ㅈㄴ큰 사진 경로
 ) engine=InnoDB default charset=utf8;
-
+select * from product;
+drop table product;
 CREATE TABLE product_status  (
 	id int auto_increment primary key,
     sale boolean, #여긴 일단 null안해놧음 sale 없을수도있으니까
@@ -65,8 +28,9 @@ CREATE TABLE product_status  (
     best  boolean, #잘팔림
     productId int
 ) engine=InnoDB default charset=utf8;
-
-
+select * from product_status;
+drop table product;
+select * from product;
 CREATE TABLE review   (
 	id int auto_increment primary key,
     productId  int,
@@ -78,7 +42,7 @@ CREATE TABLE review   (
     existenceOfImg boolean, #이미지 올린놈인지아닌지
     orderId int #결제방법때문에필요
 ) engine=InnoDB default charset=utf8;
-
+select * from review;
 
 CREATE TABLE user   (
 	id int auto_increment primary key,
@@ -106,6 +70,7 @@ CREATE TABLE recomment   (
     comment   varchar(2000),
     createDate  timestamp
 ) engine=InnoDB default charset=utf8;
+select * from recomment;
 
 CREATE TABLE notice   (
 	id int auto_increment primary key,
@@ -125,7 +90,7 @@ CREATE TABLE qna   (
     answer boolean ,
     productId int
 ) engine=InnoDB default charset=utf8;
-
+select * from qna;
 CREATE TABLE orders   (
 	id int auto_increment primary key,
     userId  int,
@@ -134,11 +99,11 @@ CREATE TABLE orders   (
     howToPay varchar(300) #결제수단넣는건가 varchar인가? 맞다
 
 ) engine=InnoDB default charset=utf8;
-
+select * from orders;
 CREATE TABLE orders_detail   (
 	id int auto_increment primary key,
     orderId  int,
-    productId int,#없어서 넣었다
+    productId int,#2022 없어서 넣었다
     quantity   int,  #몇개냐 이말
     price  int,
     stats varchar(200), # 상태니까 boolean 해봄 헷갈림 ㅠ
@@ -159,7 +124,7 @@ CREATE TABLE coupon   (
     validityEnd date,#쿠폰 끝나는 유효기간 validity붙임
     availability boolean # boolean 으로해봄 유효성 헷갈림
 ) engine=InnoDB default charset=utf8;
-
+select * from coupon;
 CREATE TABLE point   (
 	id int auto_increment primary key,
     userId  int,
@@ -168,8 +133,9 @@ CREATE TABLE point   (
     point int,
     totalPoint int
 ) engine=InnoDB default charset=utf8;
+select * from point;
 
-CREATE TABLE related_product   ( #관련상품
+CREATE TABLE related_product   ( #관련상품 2022 N:N 이런거 생각하면 복잡함
 	id int auto_increment primary key,
     parentProductId  int, #detail로 올때 누른 상품
     relatedProductId int #연관된 상품 1-2 , 1-3
@@ -179,22 +145,19 @@ select * from related_product;
 CREATE TABLE category   (
 	id int auto_increment primary key,
     type  varchar(200), #type 헷갈려서 여긴 varchar함,
-    parentTypeId int # 확장성을 위함같은데
+    parentTypeId int #2022 확장성을 위함같은데
 ) engine=InnoDB default charset=utf8;
 
-CREATE TABLE cart(# 종이에는 product_status에 따라서 다르다는데 모르겠음
+CREATE TABLE cart(# 2022 종이에는 product_status에 따라서 다르다는데 모르겠음
 	id int auto_increment primary key,
     productId int,
     userId int,
     quantity int,
     price int
 ) engine=InnoDB default charset=utf8;
-```
-
-# join과 test를 위한 데이터
-
-```sql
+#join과 test를 위한 데이터
 #user 더미 데이터
+select * from user;
 insert into user(username,password,email,name,gender,phone,address,detail_address,birthday,total_amount,role,cancel,profile,provider,providerId,createDate)
 values('cos','cos1234','tjdtnsla0321@nate.com','최주호','남','010-2222-0000','부산광역시 진구','서면 파이널센터 4층','1985-02-01',120000,'ROLE_USER',false,'프로필입니다.','직접가입함','직접가입함',now());
 
@@ -214,7 +177,8 @@ insert into product(title,thumb,price,disc,ad,discounted,content,categoryId,bgIm
 values ('패밀리 키친 세트','thumb의 경로2',40000,'프레시 디시 앤 프루트 워시 (오렌지) 500ml * 1ea 베이비 보틀 앤 토이 워시 (무향) 500ml * 1ea',true,34000,'content2',2,'bgImg의 경로2');
 insert into product(title,thumb,price,disc,ad,discounted,content,categoryId,bgImg)
 values ('기프트 세트','thumb의 경로3',63000,'OPTION. 구성품 택1 (키친 세트,리빙케어 세트, 런드미 세트중) OPTION 2. 박스 색상 택1 (프레시 네이버,베이비 민트 중)',false,39000,'content3',2,'bgImg의 경로3');
-
+select * from user;
+commit;
 #product_status 더미데이터
 insert into product_status(id,sale,newly, best,productId)
 values(1,false,true,false,1);
@@ -268,6 +232,7 @@ insert into orders_detail(orderId,productId,quantity,price,stats,fee)
 values (1,1,1,28000,'배송중',3000);
 insert into orders_detail(orderId,productId,quantity,price,stats,fee)
 values (1,1,2,40000,'배송중',3000);
+select * from orders_detail;
 
 #wishlist 더미데이터
 insert into wishlist(userid,productId)values(1,1);
@@ -291,6 +256,7 @@ insert into point(userId,historyDate,reason,point,totalPoint)
 values(3,now(),'출금했으니까',1000,5200);
 
 #related_product 더미데이터
+
 insert into related_product(parentProductId,relatedProductId)
 values (1,3);
 insert into related_product(parentProductId,relatedProductId)
@@ -300,27 +266,9 @@ values (3,3);
 insert into related_product(parentProductId,relatedProductId)
 values (1,2);
 
-#category 더미데이터
-insert into category(type,parentTypeId)
-values ("싱글상품",1);
-insert into category(type,parentTypeId)
-values ("세트상품",2);
+#########################조인##########################
 
-#cart 더미데이터
-insert into cart(productId,userId,quantity,price)
-values (1,1,2,28000);
 
-insert into cart(productId,userId,quantity,price)
-values (2,1,1,40000);
-
-insert into cart(productId,userId,quantity,price)
-values (1,2,2,28000);
-
-```
-
-# 아르아르 dto를 위한 join
-
-```sql
 ##INDEX 페이지 입니다.
 
 #대문 dto
@@ -328,16 +276,30 @@ SELECT id,bgimg
 FROM product
 where ad=true;
 
-#PRODUCTS 카르셀 dto
-SELECT title,price,discounted,sale,newly,best
-FROM product p INNER JOIN product_status pst
-ON p.id = pst.productId;
 
 #REVIEW dto
 SELECT *
 FROM review r INNER JOIN product p
 ON p.id = r.productId;
 
+#PRODUCTS 카르셀 dto
+SELECT title,price,discounted,sale,newly,best
+FROM product p INNER JOIN product_status pst
+ON p.id = pst.productId;
+
+################################################################################
+
+SELECT r.content,us.name,r.img,p.title,p.title,p.price,p.discounted,pst.sale,pst.newly,pst.best
+FROM review r INNER JOIN product p inner join user us inner join product_status pst
+ON p.id = r.productId and r.userid = us.id and p.id = pst.productId;
+
+select * from review;
+select * from user;
+select * from product;
+
+
+
+#####################################################################
 ##SHOP 페이지입니다. 이거를 dto를 만들던지 react에서 categoryId로 분리합시다.
 SELECT p.id,thumb,title,price,discounted,sale,newly,best,categoryId
 FROM product p INNER JOIN product_status pst
@@ -359,11 +321,11 @@ ON p.id = r.productId AND u.id = r.userId;
 
 ##NOTICE 페이지 입니다.
 #해당 페이지는 게시판(공지) 입니다. 댓글은 원래 존재하나 안쓸예정
-SELECT * FROM NOTICE
+SELECT * FROM NOTICE;
 
 ##MyPage 입니다.
 
-## (기본 조인) 숫자 1은 동적으로 바꿔야 한다.
+## (기본 조인) 숫자 1 은 동적으로 바꿔야 한다.
 SELECT u.username, u.profile, u.total_amount, (SELECT COUNT(*) FROM coupon where coupon.id = 1)
 FROM user u INNER JOIN coupon c
 ON u.id = c.userId
@@ -439,15 +401,25 @@ FROM user u INNER JOIN cart c INNER JOIN product p
 ON u.id = c.userId AND p.id = c.productId
 WHERE u.id = 1;
 
-```
 
-## 관리자 dto를 위한 join
+#category 더미데이터
+insert into category(type,parentTypeId)
+values ("싱글상품",1);
+insert into category(type,parentTypeId)
+values ("세트상품",2);
 
-# 관리자는 각 테이블들에 대한 CRUD가 기본
+#cart 더미데이터
+insert into cart(productId,userId,quantity,price)
+values (1,1,2,28000);
 
-# 연관 있는것과 join을 하면 페이지수가 줄어든다.
+insert into cart(productId,userId,quantity,price)
+values (2,1,1,40000);
 
-```sql
+insert into cart(productId,userId,quantity,price)
+values (1,2,2,28000);
+
+
+##################관리자페이지#############################
 ##상품 CRUD
 #category
 #product
@@ -477,39 +449,5 @@ WHERE u.id = 1;
 
 #point
 
-
+select * from user;
 ```
-
-## ABOUT 페이지 발견해서 만든것들
-
-```sql
-##ABOUT 페이지 입니다.
-CREATE TABLE about   (
-	id int auto_increment primary key,
-    subject varchar(500),
-    content varchar(500)
-) engine=InnoDB default charset=utf8;
-
-
-##subject는 선택해서 넣습니다.
-INSERT into about(subject,content)
-values ("제목","내용");
-```
-
-# 현재 큰 문제점 discounted를 이용하려면 관련된 dto를 수정해야함
-
-- product_status를 생각해야함.
-
-# VIEW는 뼈대만 간신히 만들고 기능을 우선적으로 할 수 밖에 없음
-
-- -> 완성되고 꾸며도 늦지 않음
-
-# modal도 나중에 넣을 수 있으면 넣기
-
-- ->회원가입과 로그인 페이지가 필요함
-
-# 결제시스템으로 orders와 orders_detail id값이 필요할때
-
-- ->mybatis generatedKey 검색
-
-# 내가 만든 쿼리문 꼭 한번 검사할것
