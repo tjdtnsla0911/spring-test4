@@ -51,7 +51,7 @@
 					<td>{{discounted}}</td>
 					<td>{{content}}</td>
 					<td>{{categoryId}}</td>
-					<td><img src="{{bgImg}}" alt="없다"></td>
+					<td><img src="{{bgImg}}" alt="없다" style="height: 100px" width="100px"></td>
 					<td>
 						<button class="btn-delete" id="bt-delete-{{id}}"
 							style="WIDTH: 60pt; HEIGHT: 20pt">삭제하기</button>
@@ -71,13 +71,12 @@
 										</button>
 										<h4 class="modal-title" id="myModalLabel">회원 정보 수정을 합시다~</h4>
 									</div>
-									<div class="modal-body">
-										<input type="text" id="modalid" class="userid" name="userid"
+									<div class="modal-body" >
+										<input type="text" id="id{{id}}" class="userid" name="userid"
 											value="{{id}}" />
-											<br/><br/>
+									 	<br/><br/>
 												<input type="text" id="modaltitle{{id}}" class="modaltitle" name="userid"
 											value="{{title}}" />	<br/><br/>
-
 												<input type="text" id="modalthumb{{id}}" class="modalthumb" name="userid"
 											value="{{thumb}}" />	<br/><br/>
 
@@ -101,7 +100,7 @@
 
 									</div>
 									<div class="modal-footer">
-									<button class="btn-update" id="btn-update-{{id}}"
+									<button class="btn-update" id="bt-update-{{id}}"
 							style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">닫기</button>
@@ -109,6 +108,10 @@
 								</div>
 							</div>
 						</div> <!--  <button class="btn-update" id="bt-update-{{id}}"  style="WIDTH: 60pt; HEIGHT: 20pt">수정하기</button>-->
+
+
+
+
 
 					</td>
 				</tr>

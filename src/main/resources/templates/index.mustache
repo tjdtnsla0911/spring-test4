@@ -39,13 +39,36 @@
 			 New로 안올린다 : <input type="radio"
 			id="radioNew" name="radioNew" value=false checked><br />
 
-			bgImg : <input type="file" id="input_img" name="img"><br />
+			bgImg : <input type="file" id="input_img2" name="img" /><br />
 		<div class="img_wrap">
-						<img id="img"  width="300" height="200"/>
+		<img id="test" src="" style="height: 200px" width="200px" />
 					</div> <br />
 
+
+<input type="hidden" id="fuck" value="여기에 사진 경로올라감"/>
+
 	</form>
+   <button onclick="javascript:encodeImageFileAsURL()">사진미리보기</button>
+
 <button id="btn-save">올립니다</button>
+
+
+
+
+
+<script >
+function encodeImageFileAsURL() {
+    var file = $('#input_img2').prop('files')[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      console.log('RESULT', reader.result);
+      $('#fuck').attr('value', reader.result);
+      $('#test').attr('src', reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+
 <script src="/js/addmin.js"></script>
 
 </body>

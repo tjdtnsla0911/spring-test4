@@ -49,6 +49,7 @@ let index = {
 				this.save();
 			});
 			$(".btn-update").on("click", (e)=>{ // function(){} , ()=>{} this를 바인딩하기 위해서!!
+
 				this.update(e);
 			});
 			$(".btn-delete").on("click", (e)=>{ // function(){} , ()=>{} this를 바인딩하기 위해서!!
@@ -58,6 +59,8 @@ let index = {
 
 
 		save: function(){
+
+
 			//alert('user의 save함수 호출됨');
 			let data = {
 					title: $("#title").val(),
@@ -66,7 +69,7 @@ let index = {
 					disc: $("#disc").val(),
 					discounted: $("#discounted").val(),
 					content: $("#content").val(),
-					bgImg: $("#input_img").val(),
+					bgImg: $("#fuck").val(),
 					radioSale : $('input:radio[name="radioSale"]:checked').val(),
 					radioAd : $('input:radio[name="radioAd"]:checked').val(),
 					radioParentTypeId : $('input:radio[name="radioParentTypeId"]:checked').val(),
@@ -75,6 +78,11 @@ let index = {
 
 
 			};
+			if(data.bgImg.length < 444){
+				alert('사진미리보기를 누르지 않으셨습니다.');
+
+			}
+
 			console.log(data);
 
 
@@ -107,23 +115,29 @@ let index = {
 		},
 
 		update: function(e){
-			let temp = (e.target.id).replace("btn-update-","");
-			console.log(temp)
 
+			console.log('e =',e);
+			let temp = (e.target.id).replace("bt-update-","");
+
+			let data2 = {
+					id: temp
+			};
+			console.log('data2 = ',data2);
 			//bt-update-{{id}}
 			let data = {
-					title: $(".modaltitle").val(),
-					thumb: $(".modalthumb").val(),
-					price: $(".modalprice").val(),
-					disc: $(".disc").val(),
-					discounted: $("#discounted").val(),
-					content: $("#content").val(),
-					bgImg: $("#input_img").val(),
-					radioSale : $('input:radio[name="radioSale"]:checked').val(),
-					radioAd : $('input:radio[name="radioAd"]:checked').val(),
-					radioParentTypeId : $('input:radio[name="radioParentTypeId"]:checked').val(),
-					radioBest : $('input:radio[name="radioBest"]:checked').val(),
-					radioNew : $('input:radio[name="radioNew"]:checked').val(),
+				    id : $("#id"+data2.id).val(),
+					title: $("#modaltitle"+data2.id).val(),
+					thumb: $("#modalthumb"+data2.id).val(),
+					price: $("#modalprice"+data2.id).val(),
+					disc: $("#modaldisc"+data2.id).val(),
+					discounted: $("#modaldiscounted"+data2.id).val(),
+					content: $("#modalcontent"+data2.id).val(),
+					bgImg: $("#modalbgImg"+data2.id).val(),
+//					radioSale : $('input:radio[name="radioSale"]:checked').val(),
+//					radioAd : $('input:radio[name="radioAd"]:checked').val(),
+//					radioParentTypeId : $('input:radio[name="radioParentTypeId"]:checked').val(),
+//					radioBest : $('input:radio[name="radioBest"]:checked').val(),
+//					radioNew : $('input:radio[name="radioNew"]:checked').val(),
 			};
 			console.log(data);
 
@@ -136,14 +150,14 @@ let index = {
 
 			$.ajax({
 				type: "PUT",
-				url: "/user",
+				url: "/change/"+data2.id,
 				data: JSON.stringify(data), // http body데이터
 				contentType: "application/json; charset=utf-8",// body데이터가 어떤 타입인지(MIME)
 				dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
 			}).done(function(resp){
-				alert("회원수정이 완료되었습니다.");
+				alert("물품변경이 완료되었습니다.");
 				//console.log(resp);
-				location.href = "/list";
+				//location.href = "/list";
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			});

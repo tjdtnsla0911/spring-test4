@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.resource.HttpResource;
 
 import com.aruerue.shop.addminDto.AddminDto;
+import com.aruerue.shop.controller.dto.ProductDto;
 import com.aruerue.shop.controller.dto.ResponseDto;
 import com.aruerue.shop.model.product.Product;
 import com.aruerue.shop.model.user.User;
@@ -122,7 +124,7 @@ public class AddminController{
 		System.out.println("다하고 나서 radioParentTypeId = "+addminDto.getRadioParentTypeId());
 		System.out.println("다하고 나서 bgImg = "+addminDto.getBgImg());
 
-
+		System.out.println(addminDto.getBgImg().length());
 		addminRepository.saveProduct(addminDto);
 		addminRepository.saveProduct_status(addminDto);
 
@@ -141,5 +143,13 @@ public class AddminController{
 		System.out.println("성공한거같은데 ㅅㅂ ");
 		return "Ok";
 	}
+	@PutMapping("/change/{id}")
+	public @ResponseBody String updata(@PathVariable int id , @RequestBody ProductDto productDto) {
+		System.out.println("체인지에왔음");
+		System.out.println("가져온값 = "+productDto);
+		return "null";
+
+	}
+
 
 }
